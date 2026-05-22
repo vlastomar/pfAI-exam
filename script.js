@@ -5,9 +5,9 @@ let chartData = {
     labels: ['Month 0', 'Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5'],
     datasets: [
         {
-            label: 'Prospects',
+            label: 'Customers',
             data: [0, 0, 0, 0, 0, 0],
-            backgroundColor: '#bfc9d9',
+            backgroundColor: '#ffd166', // gold/yellow
             borderRadius: 6,
             barPercentage: 0.7,
             categoryPercentage: 0.7
@@ -15,15 +15,15 @@ let chartData = {
         {
             label: 'Leads',
             data: [0, 0, 0, 0, 0, 0],
-            backgroundColor: '#7ea6d6',
+            backgroundColor: '#4895ef', // blue
             borderRadius: 6,
             barPercentage: 0.7,
             categoryPercentage: 0.7
         },
         {
-            label: 'Customers',
+            label: 'Prospects',
             data: [0, 0, 0, 0, 0, 0],
-            backgroundColor: '#3a8dde',
+            backgroundColor: '#e0e5ec', // light gray
             borderRadius: 6,
             barPercentage: 0.7,
             categoryPercentage: 0.7
@@ -108,24 +108,21 @@ function calculateAndUpdate() {
     // Update chart data dynamically for stacked bars
     // Each month bar: Prospects (full), Leads (difference), Customers (difference)
     let months = 6;
-    let prospectsArr = [];
-    let leadsArr = [];
     let customersArr = [];
+    let leadsArr = [];
+    let prospectsArr = [];
     for (let i = 0; i < months; i++) {
         // Simulate growth for each month (linear for demo)
-        let p = Math.round(prospects * (i + 1) / months);
-        let l = Math.round(leads * (i + 1) / months);
         let c = Math.round(customers * (i + 1) / months);
-        // Prospects bar is always the largest
-        prospectsArr.push(p);
-        // Leads is only the part above customers
-        leadsArr.push(l - c);
-        // Customers is the smallest, always at the top
+        let l = Math.round(leads * (i + 1) / months) - c;
+        let p = Math.round(prospects * (i + 1) / months) - (l + c);
         customersArr.push(c);
+        leadsArr.push(l);
+        prospectsArr.push(p);
     }
-    chartData.datasets[0].data = prospectsArr;
+    chartData.datasets[0].data = customersArr;
     chartData.datasets[1].data = leadsArr;
-    chartData.datasets[2].data = customersArr;
+    chartData.datasets[2].data = prospectsArr;
     barChart.update();
 }
 leadRate.addEventListener('input', calculateAndUpdate);
