@@ -1,10 +1,11 @@
+
 // --- Chart.js Bar Chart Data and Config ---
 const ctx = document.getElementById('barChart').getContext('2d');
 let chartData = {
-    labels: ['1', '2', '3', '4', '5', '6'],
+    labels: ['Month 0', 'Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5'],
     datasets: [{
         label: 'People',
-        data: [10, 30, 25, 60, 90, 125],
+        data: [10, 20, 15, 60, 90, 125],
         backgroundColor: '#7e8fa6',
         borderRadius: 6,
         barPercentage: 0.7,
@@ -21,8 +22,9 @@ let barChart = new Chart(ctx, {
             tooltip: {
                 callbacks: {
                     label: function(context) {
-                        const month = context.dataIndex + 1;
-                        return `Month #${month}\nProspects: 63\nLeads: 13\nCustomers: 5`;
+                        const month = context.dataIndex;
+                        // Show dynamic values for each month
+                        return `Month ${month}\nProspects: ${Math.round(chartData.datasets[0].data[month])}`;
                     }
                 }
             }
@@ -35,7 +37,7 @@ let barChart = new Chart(ctx, {
             },
             y: {
                 grid: { color: '#2e3950' },
-                ticks: { color: '#e6eaf1', callback: v => 'Month ' + v }
+                ticks: { color: '#e6eaf1' }
             }
         }
     }
@@ -77,6 +79,16 @@ function calculateAndUpdate() {
     document.querySelector('.customers .percent').textContent = ((customers / prospects * 100).toFixed(0) || 0) + '%';
     document.querySelector('.leads .percent').textContent = ((leads / prospects * 100).toFixed(0) || 0) + '%';
     document.querySelector('.prospects .percent').textContent = '100%';
+
+    // Update chart data dynamically (simulate growth for each month)
+    let chartPeople = [];
+    let base = Math.round(prospects / 6);
+    for (let i = 0; i < 6; i++) {
+        // Simulate a growth curve (linear or custom)
+        chartPeople.push(Math.round(base * (i + 1) * (0.7 + 0.3 * i / 5)));
+    }
+    chartData.datasets[0].data = chartPeople;
+    barChart.update();
 }
 leadRate.addEventListener('input', calculateAndUpdate);
 prospectRate.addEventListener('input', calculateAndUpdate);
