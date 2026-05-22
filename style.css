@@ -2,9 +2,13 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
     min-height: 100vh;
+}
+
+body {
     background: #151c26;
     color: #edf2f8;
     font-family: Arial, Helvetica, sans-serif;
@@ -13,39 +17,52 @@ body {
 .dashboard {
     display: flex;
     min-height: 100vh;
+    gap: 16px;
     background:
         radial-gradient(circle at 50% 5%, rgba(70, 90, 120, 0.15), transparent 45%),
         #151c26;
 }
 
 .sidebar {
-    width: 230px;
-    min-width: 230px;
-    padding: 24px 18px;
-    background: #202938;
-    border-right: 1px solid rgba(255,255,255,0.04);
+    width: 216px;
+    min-width: 216px;
+    height: 496px;
+    padding: 18px 8px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(143, 156, 179, 0.08);
+    border-radius: 0 0 10px 0;
+    background:
+        linear-gradient(180deg, rgba(35, 44, 59, 0.98), rgba(30, 39, 53, 0.98));
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.10);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 32px;
+    gap: 6px;
+    margin: 0 0 22px;
     color: #aeb7c5;
-    font-size: 28px;
+    font-size: 25px;
     font-weight: 800;
     letter-spacing: -1px;
 }
 
 .logo-icon {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     display: inline-grid;
     place-items: center;
-    color: #c5ccd7;
-    background: #8792a3;
+    flex: 0 0 24px;
     border-radius: 5px;
-    font-size: 17px;
+    background: #a8b2c0;
+}
+
+.logo-icon svg {
+    width: 19px;
+    height: 19px;
+    fill: #405066;
 }
 
 .logo-text span {
@@ -53,14 +70,14 @@ body {
 }
 
 .sidebar-group {
-    margin-bottom: 22px;
+    margin: 0 8px 17px;
 }
 
 .sidebar-group label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 9px;
     color: #ffffff;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 700;
 }
 
@@ -68,12 +85,13 @@ body {
 .sidebar-group select,
 .money-input {
     width: 100%;
-    height: 34px;
-    border: 1px solid rgba(178, 190, 207, 0.13);
+    height: 32px;
+    border: 1px solid rgba(178, 190, 207, 0.15);
     border-radius: 6px;
     background: #2b3547;
     color: #f4f7fb;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 600;
     outline: none;
 }
 
@@ -89,8 +107,8 @@ body {
 }
 
 .money-input span {
-    color: #c8d0dc;
     margin-right: 7px;
+    color: #c8d0dc;
     font-weight: 700;
 }
 
@@ -103,43 +121,45 @@ body {
 
 .main-content {
     flex: 1;
-    padding: 30px 36px;
+    padding: 19px 16px 10px 0;
 }
 
 .top-panel {
     display: grid;
-    grid-template-columns: minmax(590px, 1fr) 210px;
-    gap: 34px;
-    max-width: 920px;
-    margin: 0 auto;
+    grid-template-columns: minmax(520px, 621px) 190px;
+    gap: 24px;
+    align-items: stretch;
+    width: fit-content;
+    margin-left: 0;
 }
 
 .chart-area {
-    height: 315px;
-    padding: 18px 18px 20px 22px;
+    width: 621px;
+    height: 327px;
+    padding: 19px 18px 24px 21px;
     border: 1px solid rgba(143, 156, 179, 0.12);
     border-radius: 10px;
     background:
         linear-gradient(180deg, rgba(35, 44, 59, 0.94), rgba(29, 38, 52, 0.94));
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.03),
-        0 14px 34px rgba(0,0,0,0.13);
+        inset 0 1px 0 rgba(255, 255, 255, 0.03),
+        0 14px 34px rgba(0, 0, 0, 0.13);
 }
 
 .summary-cards {
+    height: 327px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    justify-content: space-between;
 }
 
 .summary-card {
-    min-height: 89px;
-    padding: 12px 12px 13px;
+    height: 90px;
+    padding: 10px 12px 11px;
     border-radius: 6px;
-    background:
-        linear-gradient(90deg, #818a97 0%, #c2c8d2 100%);
+    background: linear-gradient(90deg, #818a97 0%, #c2c8d2 100%);
     color: #1f2734;
-    box-shadow: 0 9px 18px rgba(0,0,0,0.18);
+    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.18);
 }
 
 .card-header {
@@ -150,24 +170,27 @@ body {
 }
 
 .summary-card .icon {
-    color: #f4f7fb;
-    background: rgba(45, 55, 72, 0.35);
+    min-width: 18px;
+    height: 18px;
+    display: inline-grid;
+    place-items: center;
     border-radius: 3px;
-    padding: 1px 4px;
-    font-size: 13px;
+    background: rgba(45, 55, 72, 0.35);
+    color: #f4f7fb;
+    font-size: 12px;
     line-height: 18px;
 }
 
 .summary-card .percent {
     color: #ffffff;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
 }
 
 .summary-card .label {
     margin-bottom: 4px;
     color: #293241;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 }
 
@@ -180,8 +203,8 @@ body {
 
 .progress-bar {
     width: 100%;
-    height: 8px;
-    margin-top: 10px;
+    height: 7px;
+    margin-top: 8px;
     overflow: hidden;
     border-radius: 20px;
     background: #4c5868;
@@ -196,19 +219,20 @@ body {
 }
 
 .sliders-row {
-    max-width: 920px;
-    margin: 18px auto 0;
-    padding: 22px 26px 24px;
+    width: 621px;
+    height: 155px;
+    margin-top: 17px;
+    padding: 18px 24px 20px;
     border: 1px solid rgba(143, 156, 179, 0.12);
     border-radius: 10px;
     background:
         linear-gradient(180deg, rgba(35, 44, 59, 0.96), rgba(29, 38, 52, 0.96));
-    box-shadow: 0 14px 34px rgba(0,0,0,0.13);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.13);
 }
 
 .slider-group {
     position: relative;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
 .slider-group:last-child {
@@ -217,17 +241,17 @@ body {
 
 .slider-group label {
     display: block;
-    margin-bottom: 22px;
+    margin-bottom: 17px;
     color: #edf2f8;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .slider-group span {
     display: block;
-    margin-top: 9px;
+    margin-top: 8px;
     color: #eef3f8;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     text-align: right;
 }
@@ -258,7 +282,7 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
-    box-shadow: 0 2px 7px rgba(0,0,0,0.35);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35);
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -268,16 +292,29 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
-    box-shadow: 0 2px 7px rgba(0,0,0,0.35);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35);
 }
 
 @media (max-width: 980px) {
+    .dashboard {
+        gap: 10px;
+    }
+
     .top-panel {
         grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .chart-area,
+    .sliders-row {
+        width: 100%;
     }
 
     .summary-cards {
+        width: 100%;
+        height: auto;
         flex-direction: row;
+        gap: 12px;
     }
 
     .summary-card {
@@ -292,10 +329,12 @@ input[type="range"]::-moz-range-thumb {
 
     .sidebar {
         width: 100%;
+        height: auto;
+        border-radius: 0 0 10px 10px;
     }
 
     .main-content {
-        padding: 20px;
+        padding: 16px;
     }
 
     .summary-cards {
