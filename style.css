@@ -1,0 +1,155 @@
+body {
+    background: #19202b;
+    color: #e6eaf1;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+}
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    background: #232b39;
+    width: 300px;
+    padding: 32px 18px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.10);
+}
+.logo {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.logo-icon {
+    font-size: 1.2em;
+}
+.logo-text .accent {
+    color: #3a8dde;
+}
+.sidebar-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.sidebar-group label {
+    margin-bottom: 4px;
+    font-size: 1em;
+}
+.sidebar-group input,
+.sidebar-group select {
+    padding: 8px;
+    border-radius: 7px;
+    border: none;
+    font-size: 1em;
+    background: #2e3950;
+    color: #fff;
+}
+.main-content {
+    flex: 1;
+    padding: 32px 32px 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+.top-row {
+    display: flex;
+    gap: 32px;
+}
+.chart-area {
+    background: #232b39;
+    border-radius: 18px;
+    padding: 24px;
+    flex: 2;
+    min-width: 400px;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.summary-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+    min-width: 180px;
+}
+.summary-card {
+    background: #e6eaf1;
+    color: #232b39;
+    border-radius: 12px;
+    padding: 18px 14px 14px 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+.summary-card .icon {
+    font-size: 1.3em;
+    margin-bottom: 4px;
+}
+.summary-card .label {
+    font-size: 1em;
+    margin-bottom: 2px;
+}
+.summary-card .value {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+.summary-card .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #cfd8e3;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    overflow: hidden;
+}
+.summary-card .progress {
+    height: 100%;
+    background: #3a8dde;
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+.summary-card .percent {
+    font-size: 0.95em;
+    color: #3a8dde;
+    position: absolute;
+    right: 14px;
+    top: 18px;
+}
+.sliders-row {
+    background: #232b39;
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    gap: 32px;
+    margin-top: 18px;
+}
+.slider-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.slider-group label {
+    font-size: 1em;
+}
+.slider-group input[type=range] {
+    width: 100%;
+    accent-color: #3a8dde;
+    margin: 8px 0;
+}
+.slider-group span {
+    font-size: 1em;
+    color: #3a8dde;
+    font-weight: bold;
+    align-self: flex-end;
+}
