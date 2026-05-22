@@ -9,75 +9,107 @@
 <body>
     <div class="dashboard">
         <aside class="sidebar">
-            <div class="logo"> <span class="logo-icon">&#128202;</span> <span class="logo-text">Lead<span class="accent">Predictor</span></span></div>
-            <div class="sidebar-group">
-                <label>Language</label>
-                <select><option>🇺🇸 English</option></select>
+            <div class="logo">
+                <span class="logo-icon">▰</span>
+                <span class="logo-text">Lead<span>Predictor</span></span>
             </div>
+
             <div class="sidebar-group">
-                <label>Currency</label>
-                <select><option>$ US Dollar</option></select>
+                <label for="language">Language</label>
+                <select id="language">
+                    <option>🇺🇸 English</option>
+                </select>
             </div>
+
             <div class="sidebar-group">
-                <label>Campaign Start</label>
-                <input type="date" value="2026-05-08">
+                <label for="currency">Currency</label>
+                <select id="currency">
+                    <option>$ US Dollar</option>
+                </select>
             </div>
+
             <div class="sidebar-group">
-                <label>Campaign End</label>
-                <input type="date" value="2026-11-04">
+                <label for="startDate">Campaign Start</label>
+                <input id="startDate" type="date" value="2026-05-08">
             </div>
+
             <div class="sidebar-group">
-                <label>Total Revenue</label>
-                <input type="number" id="revenue" value="10000">
+                <label for="endDate">Campaign End</label>
+                <input id="endDate" type="date" value="2026-11-04">
             </div>
+
             <div class="sidebar-group">
-                <label>Avg. Order Value</label>
-                <input type="number" id="orderValue" value="1000">
+                <label for="revenue">Total Revenue</label>
+                <div class="money-input">
+                    <span>$</span>
+                    <input type="number" id="revenue" value="10000">
+                </div>
+            </div>
+
+            <div class="sidebar-group">
+                <label for="orderValue">Avg. Order Value</label>
+                <div class="money-input">
+                    <span>$</span>
+                    <input type="number" id="orderValue" value="1000">
+                </div>
             </div>
         </aside>
+
         <main class="main-content">
-            <div class="top-row">
+            <section class="top-panel">
                 <div class="chart-area">
                     <canvas id="barChart"></canvas>
                 </div>
+
                 <div class="summary-cards">
                     <div class="summary-card prospects">
-                        <div class="icon">&#128188;</div>
+                        <div class="card-header">
+                            <span class="icon">▣</span>
+                            <span class="percent">100%</span>
+                        </div>
                         <div class="label">Prospects</div>
                         <div class="value" id="prospectsValue">125</div>
-                        <div class="progress-bar"><div class="progress" id="prospectsBar" style="width:100%"></div></div>
-                        <div class="percent">100%</div>
+                        <div class="progress-bar"><div class="progress" id="prospectsBar"></div></div>
                     </div>
+
                     <div class="summary-card leads">
-                        <div class="icon">&#128100;</div>
+                        <div class="card-header">
+                            <span class="icon">♟</span>
+                            <span class="percent">20%</span>
+                        </div>
                         <div class="label">Leads</div>
                         <div class="value" id="leadsValue">25</div>
-                        <div class="progress-bar"><div class="progress" id="leadsBar" style="width:20%"></div></div>
-                        <div class="percent">20%</div>
+                        <div class="progress-bar"><div class="progress" id="leadsBar"></div></div>
                     </div>
+
                     <div class="summary-card customers">
-                        <div class="icon">&#129351;</div>
+                        <div class="card-header">
+                            <span class="icon">♜</span>
+                            <span class="percent">8%</span>
+                        </div>
                         <div class="label">Customers</div>
                         <div class="value" id="customersValue">10</div>
-                        <div class="progress-bar"><div class="progress" id="customersBar" style="width:8%"></div></div>
-                        <div class="percent">8%</div>
+                        <div class="progress-bar"><div class="progress" id="customersBar"></div></div>
                     </div>
                 </div>
-            </div>
-            <div class="sliders-row">
+            </section>
+
+            <section class="sliders-row">
                 <div class="slider-group">
                     <label for="leadRate">Lead Response Rate</label>
-                    <input type="range" id="leadRate" min="1" max="100" value="20">
-                    <span id="leadRateValue">20.00%</span>
+                    <input type="range" id="leadRate" min="1" max="100" value="40">
+                    <span id="leadRateValue">40.00%</span>
                 </div>
+
                 <div class="slider-group">
                     <label for="prospectRate">Prospect Response Rate</label>
-                    <input type="range" id="prospectRate" min="1" max="100" value="40">
-                    <span id="prospectRateValue">40.00%</span>
+                    <input type="range" id="prospectRate" min="1" max="100" value="20">
+                    <span id="prospectRateValue">20.00%</span>
                 </div>
-            </div>
+            </section>
         </main>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
