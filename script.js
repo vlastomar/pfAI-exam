@@ -1,16 +1,34 @@
 
-// --- Chart.js Bar Chart Data and Config ---
+// --- Chart.js Stacked Bar Chart Data and Config ---
 const ctx = document.getElementById('barChart').getContext('2d');
 let chartData = {
     labels: ['Month 0', 'Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5'],
-    datasets: [{
-        label: 'People',
-        data: [10, 20, 15, 60, 90, 125],
-        backgroundColor: '#7e8fa6',
-        borderRadius: 6,
-        barPercentage: 0.7,
-        categoryPercentage: 0.7
-    }]
+    datasets: [
+        {
+            label: 'Prospects',
+            data: [0, 0, 0, 0, 0, 0],
+            backgroundColor: '#bfc9d9',
+            borderRadius: 6,
+            barPercentage: 0.7,
+            categoryPercentage: 0.7
+        },
+        {
+            label: 'Leads',
+            data: [0, 0, 0, 0, 0, 0],
+            backgroundColor: '#7ea6d6',
+            borderRadius: 6,
+            barPercentage: 0.7,
+            categoryPercentage: 0.7
+        },
+        {
+            label: 'Customers',
+            data: [0, 0, 0, 0, 0, 0],
+            backgroundColor: '#3a8dde',
+            borderRadius: 6,
+            barPercentage: 0.7,
+            categoryPercentage: 0.7
+        }
+    ]
 };
 let barChart = new Chart(ctx, {
     type: 'bar',
@@ -24,7 +42,12 @@ let barChart = new Chart(ctx, {
                     label: function(context) {
                         const month = context.dataIndex;
                         // Show dynamic values for each month
-                        return `Month ${month}\nProspects: ${Math.round(chartData.datasets[0].data[month])}`;
+                        return (
+                            `Month ${month}\n` +
+                            `Prospects: ${Math.round(chartData.datasets[0].data[month])}\n` +
+                            `Leads: ${Math.round(chartData.datasets[1].data[month])}\n` +
+                            `Customers: ${Math.round(chartData.datasets[2].data[month])}`
+                        );
                     }
                 }
             }
@@ -33,10 +56,12 @@ let barChart = new Chart(ctx, {
             x: {
                 beginAtZero: true,
                 grid: { color: '#2e3950' },
+                stacked: true,
                 ticks: { color: '#e6eaf1', callback: v => v + ' people' }
             },
             y: {
                 grid: { color: '#2e3950' },
+                stacked: true,
                 ticks: { color: '#e6eaf1' }
             }
         }
@@ -80,14 +105,27 @@ function calculateAndUpdate() {
     document.querySelector('.leads .percent').textContent = ((leads / prospects * 100).toFixed(0) || 0) + '%';
     document.querySelector('.prospects .percent').textContent = '100%';
 
-    // Update chart data dynamically (simulate growth for each month)
-    let chartPeople = [];
-    let base = Math.round(prospects / 6);
-    for (let i = 0; i < 6; i++) {
-        // Simulate a growth curve (linear or custom)
-        chartPeople.push(Math.round(base * (i + 1) * (0.7 + 0.3 * i / 5)));
+    // Update chart data dynamically for stacked bars
+    // Each month bar: Prospects (full), Leads (difference), Customers (difference)
+    let months = 6;
+    let prospectsArr = [];
+    let leadsArr = [];
+    let customersArr = [];
+    for (let i = 0; i < months; i++) {
+        // Simulate growth for each month (linear for demo)
+        let p = Math.round(prospects * (i + 1) / months);
+        let l = Math.round(leads * (i + 1) / months);
+        let c = Math.round(customers * (i + 1) / months);
+        // Prospects bar is always the largest
+        prospectsArr.push(p);
+        // Leads is only the part above customers
+        leadsArr.push(l - c);
+        // Customers is the smallest, always at the top
+        customersArr.push(c);
     }
-    chartData.datasets[0].data = chartPeople;
+    chartData.datasets[0].data = prospectsArr;
+    chartData.datasets[1].data = leadsArr;
+    chartData.datasets[2].data = customersArr;
     barChart.update();
 }
 leadRate.addEventListener('input', calculateAndUpdate);
