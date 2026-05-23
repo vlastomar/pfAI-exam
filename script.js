@@ -166,33 +166,39 @@ function updateSliders() {
 function calculateAndUpdate() {
     const revenue = parseFloat(revenueInput.value) || 0;
     const orderValue = parseFloat(orderValueInput.value) || 1;
-    const lead = parseFloat(leadRate.value) || 1;
-    const prospect = parseFloat(prospectRate.value) || 1;
+    const leadResponseRate = parseFloat(leadRate.value) || 1;
+    const prospectResponseRate = parseFloat(prospectRate.value) || 1;
 
-    // Direct slider behaviour:
-    // When a slider is moved to the right, the totals and chart bars increase.
-    const baseCustomers = revenue / orderValue;
-    const growthFactor = 3.2;
+    // Formula 01:
+    // Customers = Total Revenue / Avg. Order Value
+    const customers = revenue / orderValue;
 
-    const prospects = baseCustomers * (lead + prospect) * growthFactor;
-    const leads = prospects * (lead / 100);
-    const customers = leads * (prospect / 100);
+    // Formula 02:
+    // Leads = Customers * 100 / Lead Response Rate
+    const leads = customers * 100 / leadResponseRate;
 
-    const prospectsPercent = Math.max(0, Math.min(prospect, 100));
-    const leadsPercent = Math.max(0, Math.min(lead, 100));
-    const customersPercent = prospects ? Math.max(0, Math.min((customers / prospects * 100), 100)) : 0;
+    // Formula 03:
+    // Prospects = Leads * 100 / Prospect Response Rate
+    const prospects = leads * 100 / prospectResponseRate;
 
-    document.getElementById('prospectsValue').textContent = Math.round(prospects);
-    document.getElementById('leadsValue').textContent = Math.round(leads);
+    // The KPI progress bars show the selected response rates.
+    // The totals still follow the required formulas above, so higher response rates
+    // correctly reduce the number of required leads/prospects.
+    const prospectsPercent = Math.max(0, Math.min(prospectResponseRate, 100));
+    const leadsPercent = Math.max(0, Math.min(leadResponseRate, 100));
+    const customersPercent = prospects ? Math.max(0, Math.min((customers / prospects) * 100, 100)) : 0;
+
     document.getElementById('customersValue').textContent = Math.round(customers);
+    document.getElementById('leadsValue').textContent = Math.round(leads);
+    document.getElementById('prospectsValue').textContent = Math.round(prospects);
 
-    document.getElementById('prospectsBar').style.width = `${prospectsPercent.toFixed(1)}%`;
-    document.getElementById('leadsBar').style.width = `${leadsPercent.toFixed(1)}%`;
     document.getElementById('customersBar').style.width = `${customersPercent.toFixed(1)}%`;
+    document.getElementById('leadsBar').style.width = `${leadsPercent.toFixed(1)}%`;
+    document.getElementById('prospectsBar').style.width = `${prospectsPercent}%`;
 
-    document.querySelector('.prospects .percent').textContent = `${prospectsPercent.toFixed(0)}%`;
-    document.querySelector('.leads .percent').textContent = `${leadsPercent.toFixed(0)}%`;
     document.querySelector('.customers .percent').textContent = `${customersPercent.toFixed(0)}%`;
+    document.querySelector('.leads .percent').textContent = `${leadsPercent.toFixed(0)}%`;
+    document.querySelector('.prospects .percent').textContent = `${prospectsPercent}%`;
 
     const months = 6;
     const customersArr = [];
