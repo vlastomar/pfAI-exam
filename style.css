@@ -100,6 +100,114 @@ body {
     padding: 0 10px;
 }
 
+.date-field {
+    position: relative;
+    width: 100%;
+    height: 32px;
+}
+
+.date-display {
+    position: absolute;
+    inset: 0;
+    padding-right: 34px !important;
+    pointer-events: none;
+}
+
+.native-date {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    z-index: 3;
+    width: 14px;
+    height: 14px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    border: 2px solid #ffffff;
+    border-radius: 2px;
+    opacity: 0.95;
+}
+
+.calendar-icon::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: 3px;
+    border-top: 2px solid #ffffff;
+}
+
+.calendar-icon::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: -4px;
+    width: 6px;
+    height: 4px;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+}
+
+.language-select {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 11px;
+    border: 1px solid rgba(178, 190, 207, 0.15);
+    border-radius: 6px;
+    background: #2b3547;
+    color: #f4f7fb;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.flag-us {
+    position: relative;
+    width: 16px;
+    height: 11px;
+    flex: 0 0 16px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.25);
+    background: repeating-linear-gradient(
+        to bottom,
+        #bf3045 0,
+        #bf3045 1px,
+        #ffffff 1px,
+        #ffffff 2px
+    );
+}
+
+.flag-us::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7px;
+    height: 6px;
+    background: #2d4f8c;
+}
+
+.language-text {
+    flex: 1;
+}
+
+.select-arrow {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: rotate(45deg) translateY(-2px);
+    opacity: 0.95;
+}
+
 .money-input {
     display: flex;
     align-items: center;
@@ -219,7 +327,7 @@ body {
 }
 
 .sliders-row {
-    width: 621px;
+    width: 835px;
     height: 155px;
     margin-top: 17px;
     padding: 18px 24px 20px;

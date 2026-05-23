@@ -117,6 +117,40 @@ const prospectRateValue = document.getElementById('prospectRateValue');
 const revenueInput = document.getElementById('revenue');
 const orderValueInput = document.getElementById('orderValue');
 
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function formatDateForDisplay(value) {
+    if (!value) {
+        return '';
+    }
+
+    const [year, month, day] = value.split('-');
+    return `${day}-${monthNames[Number(month) - 1]}-${year}`;
+}
+
+function connectDatePicker(inputId, displayId) {
+    const input = document.getElementById(inputId);
+    const display = document.getElementById(displayId);
+
+    if (!input || !display) {
+        return;
+    }
+
+    const updateDisplay = () => {
+        display.value = formatDateForDisplay(input.value);
+    };
+
+    input.addEventListener('change', updateDisplay);
+    input.addEventListener('input', updateDisplay);
+    input.addEventListener('click', () => {
+        if (typeof input.showPicker === 'function') {
+            input.showPicker();
+        }
+    });
+
+    updateDisplay();
+}
+
 function setSliderFill(slider) {
     const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
     slider.style.setProperty('--percent', `${percent}%`);
@@ -189,6 +223,8 @@ function calculateAndUpdate() {
 });
 
 window.addEventListener('load', () => {
+    connectDatePicker('startDate', 'startDateDisplay');
+    connectDatePicker('endDate', 'endDateDisplay');
     updateSliders();
     calculateAndUpdate();
 });
