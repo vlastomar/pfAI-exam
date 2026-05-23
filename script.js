@@ -173,20 +173,21 @@ function calculateAndUpdate() {
     const leads = customers * 100 / lead;
     const prospects = leads * 100 / prospect;
 
-    const customersPercent = prospects ? (customers / prospects * 100) : 0;
-    const leadsPercent = prospects ? (leads / prospects * 100) : 0;
+    const prospectsPercent = Math.max(0, Math.min(prospect, 100));
+    const leadsPercent = Math.max(0, Math.min(lead, 100));
+    const customersPercent = prospects ? Math.max(0, Math.min((customers / prospects * 100), 100)) : 0;
 
     document.getElementById('customersValue').textContent = Math.round(customers);
     document.getElementById('leadsValue').textContent = Math.round(leads);
     document.getElementById('prospectsValue').textContent = Math.round(prospects);
 
-    document.getElementById('customersBar').style.width = `${customersPercent.toFixed(1)}%`;
+    document.getElementById('prospectsBar').style.width = `${prospectsPercent.toFixed(1)}%`;
     document.getElementById('leadsBar').style.width = `${leadsPercent.toFixed(1)}%`;
-    document.getElementById('prospectsBar').style.width = '100%';
+    document.getElementById('customersBar').style.width = `${customersPercent.toFixed(1)}%`;
 
-    document.querySelector('.customers .percent').textContent = `${customersPercent.toFixed(0)}%`;
+    document.querySelector('.prospects .percent').textContent = `${prospectsPercent.toFixed(0)}%`;
     document.querySelector('.leads .percent').textContent = `${leadsPercent.toFixed(0)}%`;
-    document.querySelector('.prospects .percent').textContent = '100%';
+    document.querySelector('.customers .percent').textContent = `${customersPercent.toFixed(0)}%`;
 
     const months = 6;
     const customersArr = [];
