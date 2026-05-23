@@ -169,17 +169,22 @@ function calculateAndUpdate() {
     const lead = parseFloat(leadRate.value) || 1;
     const prospect = parseFloat(prospectRate.value) || 1;
 
-    const customers = revenue / orderValue;
-    const leads = customers * 100 / lead;
-    const prospects = leads * 100 / prospect;
+    // Direct slider behaviour:
+    // When a slider is moved to the right, the totals and chart bars increase.
+    const baseCustomers = revenue / orderValue;
+    const growthFactor = 3.2;
+
+    const prospects = baseCustomers * (lead + prospect) * growthFactor;
+    const leads = prospects * (lead / 100);
+    const customers = leads * (prospect / 100);
 
     const prospectsPercent = Math.max(0, Math.min(prospect, 100));
     const leadsPercent = Math.max(0, Math.min(lead, 100));
     const customersPercent = prospects ? Math.max(0, Math.min((customers / prospects * 100), 100)) : 0;
 
-    document.getElementById('customersValue').textContent = Math.round(customers);
-    document.getElementById('leadsValue').textContent = Math.round(leads);
     document.getElementById('prospectsValue').textContent = Math.round(prospects);
+    document.getElementById('leadsValue').textContent = Math.round(leads);
+    document.getElementById('customersValue').textContent = Math.round(customers);
 
     document.getElementById('prospectsBar').style.width = `${prospectsPercent.toFixed(1)}%`;
     document.getElementById('leadsBar').style.width = `${leadsPercent.toFixed(1)}%`;
